@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2024 Bikeletics.com - All Rights Reserved
+ * Copyright (C) 2024 MoodMotion.io - All Rights Reserved
  *
  *   ----------------------------
  *    Proprietary and confidential
  *   ----------------------------
  *
- * This file is part of the Bikeletics Ride application
+ * This file is part of the MoodMotion API
  *
  * Unauthorized copying of this file, via any medium is 
  * strictly prohibited.
@@ -14,9 +14,6 @@ import { Document, Model, Schema, SchemaTypes, Types, model } from 'mongoose'
 import { tokenTypes } from '../config/tokens'
 import toJSON from './plugins/toJSON.plugin'
 
-/**
- * 
- */
 export interface TokenDocument extends Document {
   token: string
   user: Types.ObjectId
@@ -25,11 +22,9 @@ export interface TokenDocument extends Document {
   blacklisted: boolean
 }
 
-interface TokenMethods { }
+export interface TokenModel extends Model<TokenDocument> { }
 
-export interface TokenModel extends Model<TokenDocument, {}, TokenMethods> { }
-
-const tokenSchema = new Schema<TokenDocument, TokenModel, TokenMethods>(
+const tokenSchema = new Schema<TokenDocument, TokenModel>(
   {
     token: {
       type: String,
@@ -63,6 +58,6 @@ const tokenSchema = new Schema<TokenDocument, TokenModel, TokenMethods>(
 // add plugin that converts mongoose to json
 tokenSchema.plugin(toJSON)
 
-const Token = model('Token', tokenSchema)
+const Token = model<TokenDocument, TokenModel>('Token', tokenSchema)
 
 export default Token

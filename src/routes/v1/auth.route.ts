@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2024  MoodMotion.io - All Rights Reserved
+ *
+ *   ----------------------------
+ *    Proprietary and confidential
+ *   ----------------------------
+ *
+ * This file is part of the MoodMotion API
+ *
+ * Unauthorized copying of this file, via any medium is 
+ * strictly prohibited.
+ */
 import { Router } from 'express'
 import validate from '../../middlewares/validate'
 import { register, login, logout, refreshTokens, forgotPassword, resetPassword, verifyEmail } from '../../validations/auth.validation'

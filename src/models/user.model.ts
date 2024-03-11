@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2024 Bikeletics.com - All Rights Reserved
+ * Copyright (C) 2024  MoodMotion.io - All Rights Reserved
  *
  *   ----------------------------
  *    Proprietary and confidential
  *   ----------------------------
  *
- * This file is part of the Bikeletics Ride application
+ * This file is part of the MoodMotion API
  *
  * Unauthorized copying of this file, via any medium is 
  * strictly prohibited.
@@ -24,17 +24,14 @@ export interface UserDocument extends Document {
   password: string
   role: string
   isEmailVerified: boolean
-}
-
-interface UserMethods {
   isPasswordMatch(password: string): Promise<boolean>
 }
 
-export interface UserModel extends Model<UserDocument, {}, UserMethods> {
+export interface UserModel extends Model<UserDocument> {
   isEmailTaken(email: string, excludeUserId?: Types.ObjectId): Promise<boolean>
 }
 
-const schema = new Schema<UserDocument, UserModel, UserMethods>(
+const schema = new Schema<UserDocument, UserModel>(
   {
     name: {
       type: String,

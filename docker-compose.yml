@@ -1,10 +1,9 @@
-
 services:
 
   api:
-    container_name: bikeletics-api
+    container_name: moodmotion-api
     environment:
-      - MONGODB_URL=mongodb://storage:27017/bikeletics
+      - MONGODB_URL=mongodb://storage:27017/moodmotion
     restart: always
     build:
       .
@@ -21,7 +20,7 @@ services:
 
   # MongoDB Storage
   storage:
-    container_name: bikeletics-state
+    container_name: moodmotion-state
     restart: always
     image: mongo:latest
     volumes:

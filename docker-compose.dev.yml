@@ -1,4 +1,4 @@
 services:
   api:
-    container_name: bikeletics-api
+    container_name: moodmotion-api
     command: yarn dev -L

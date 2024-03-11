@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2024  MoodMotion.io - All Rights Reserved
+ *
+ *   ----------------------------
+ *    Proprietary and confidential
+ *   ----------------------------
+ *
+ * This file is part of the MoodMotion API
+ *
+ * Unauthorized copying of this file, via any medium is 
+ * strictly prohibited.
+ */
 import httpStatus from 'http-status'
 import Token from '../models/token.model'
 import ApiError from '../errors/ApiError'
@@ -69,17 +81,17 @@ const refreshAuth = async (refreshToken: string): Promise<object> => {
  */
 const resetPassword = async (resetPasswordToken: string, newPassword: string): Promise<any> => {
   try {
-    const resetPasswordTokenDoc = await verifyToken(resetPasswordToken, tokenTypes.RESET_PASSWORD);
-    const user = await getUserById(resetPasswordTokenDoc.user);
+    const resetPasswordTokenDoc = await verifyToken(resetPasswordToken, tokenTypes.RESET_PASSWORD)
+    const user = await getUserById(resetPasswordTokenDoc.user)
     if (!user) {
-      throw new Error();
+      throw new Error()
     }
-    await updateUserById(user.id, { password: newPassword });
-    await Token.deleteMany({ user: user.id, type: tokenTypes.RESET_PASSWORD });
+    await updateUserById(user.id, { password: newPassword })
+    await Token.deleteMany({ user: user.id, type: tokenTypes.RESET_PASSWORD })
   } catch (error) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed')
   }
-};
+}
 
 /**
  * Verify email
@@ -88,16 +100,16 @@ const resetPassword = async (resetPasswordToken: string, newPassword: string): P
  */
 const verifyEmail = async (verifyEmailToken: string): Promise<any> => {
   try {
-    const verifyEmailTokenDoc = await verifyToken(verifyEmailToken, tokenTypes.VERIFY_EMAIL);
-    const user = await getUserById(verifyEmailTokenDoc.user);
+    const verifyEmailTokenDoc = await verifyToken(verifyEmailToken, tokenTypes.VERIFY_EMAIL)
+    const user = await getUserById(verifyEmailTokenDoc.user)
     if (!user) {
-      throw new Error();
+      throw new Error()
     }
-    await Token.deleteMany({ user: user.id, type: tokenTypes.VERIFY_EMAIL });
-    await updateUserById(user.id, { isEmailVerified: true });
+    await Token.deleteMany({ user: user.id, type: tokenTypes.VERIFY_EMAIL })
+    await updateUserById(user.id, { isEmailVerified: true })
   } catch (error) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed')
   }
 };
 
-export { loginUserWithEmailAndPassword, logout, refreshAuth, resetPassword, verifyEmail };
+export { loginUserWithEmailAndPassword, logout, refreshAuth, resetPassword, verifyEmail }
